@@ -1,13 +1,13 @@
 import { makeAutoObservable } from "mobx";
 
 class MainStore {
-  difficultyCurrent = 0;
+  difficultyCurrent = 'Eazy';
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  difficultyChange(difficulty: number) {
+  difficultyChange(difficulty: string) {
     this.difficultyCurrent = difficulty;
   }
 
@@ -17,7 +17,7 @@ class MainStore {
   happiness = 0
 
   easy() {
-      if (this.difficultyCurrent === 1) {
+      if (this.difficultyCurrent === 'Eazy') {
           this.health = 100
           this.hunger = 100
           this.money = 100
@@ -26,7 +26,7 @@ class MainStore {
   }
 
   medium() {
-      if (this.difficultyCurrent === 2) {
+      if (this.difficultyCurrent === 'Middle') {
           this.health = 70
           this.hunger = 70
           this.money = 70
@@ -35,12 +35,30 @@ class MainStore {
   }
 
   hard() {
-      if (this.difficultyCurrent === 3) {
+      if (this.difficultyCurrent === 'Rich') {
           this.health = 40
           this.hunger = 40
           this.money = 40
           this.happiness = 40
       }
+  }
+
+  // Buffs
+
+  education = false
+  relationships = false
+  credit = false
+
+  getEducation(buff: boolean) {
+    this.education = buff
+  }
+
+  getRelationships(buff: boolean) {
+    this.relationships = buff
+  }
+
+  getCredit(buff: boolean) {
+    this.credit = buff
   }
 }
 
