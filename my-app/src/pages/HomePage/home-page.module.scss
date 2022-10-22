@@ -1,5 +1,5 @@
 .homepage {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-color: #c0d5bd;
 
@@ -175,8 +175,6 @@
 
 @media (max-width: 1150px) {
   .homepage {
-    height: 100%;
-
     &_container {
       padding: 0;
     }
