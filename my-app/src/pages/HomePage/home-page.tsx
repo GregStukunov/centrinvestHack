@@ -3,18 +3,20 @@ import { NavLink } from "react-router-dom";
 import styles from "./home-page.module.scss";
 import { observer } from "mobx-react-lite";
 
+import { mainStore } from "../../store/main-store";
+
 import PoorSVG from "../../assets/images/Poor.svg";
 import NormalSVG from "../../assets/images/Normal.svg";
 import RichSVG from "../../assets/images/Rich.svg";
 
 const HomePage = observer(() => {
-  const [selectRadioBtn, setSelectRadioBtn] = useState("Poor");
+  const [selectRadioBtn, setSelectRadioBtn] = useState("Eazy");
   const isRadioSelected = (value: string): boolean => selectRadioBtn === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void =>
-    setSelectRadioBtn(e.currentTarget.value);
+    setSelectRadioBtn(e.currentTarget.value)
 
-  const poor = "Poor";
-  const normal = "Normal";
+  const poor = 'Eazy';
+  const normal = "Middle";
   const rich = "Rich";
 
   return (
@@ -85,7 +87,7 @@ const HomePage = observer(() => {
                 isRadioSelected(normal) && styles.yellow
               } ${isRadioSelected(rich) && styles.green}`}
             >
-              <NavLink to="/game">Начать Игру</NavLink>
+              <NavLink to="/game" onClick={() => mainStore.difficultyChange(selectRadioBtn)}>Начать Игру</NavLink>
             </div>
           </div>
         </div>

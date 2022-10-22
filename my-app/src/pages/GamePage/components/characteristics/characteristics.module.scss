@@ -1,0 +1,38 @@
+.characteristics {
+    max-width: 650px;
+    background-color: #546851;
+    border-radius: 10px 10px 0 0;
+
+    &_container {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 0;
+    }
+
+    &_item {
+        font-family: Roboto Mono;
+        color: white;
+        font-size: 25px;
+        text-align: center;
+
+        & img {
+            height: 60px;
+        }
+
+        & div {
+            margin-top: 10px;
+        }
+    }
+}
+
+.green {
+    filter: invert(36%) sepia(89%) saturate(611%) hue-rotate(40deg) brightness(99%) contrast(101%);
+}
+
+.yellow {
+    filter: invert(30%) sepia(26%) saturate(2122%) hue-rotate(23deg) brightness(97%) contrast(102%);
+}
+
+.red {
+    filter: invert(77%) sepia(53%) saturate(1012%) hue-rotate(301deg) brightness(112%) contrast(102%);
+}
