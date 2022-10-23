@@ -13,9 +13,9 @@ const HomePage = observer(() => {
   const [selectRadioBtn, setSelectRadioBtn] = useState("Eazy");
   const isRadioSelected = (value: string): boolean => selectRadioBtn === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void =>
-    setSelectRadioBtn(e.currentTarget.value)
+    setSelectRadioBtn(e.currentTarget.value);
 
-  const poor = 'Eazy';
+  const poor = "Eazy";
   const normal = "Middle";
   const rich = "Rich";
 
@@ -60,7 +60,7 @@ const HomePage = observer(() => {
                 className={`${isRadioSelected(normal) && styles.label}`}
                 htmlFor="2"
               >
-                Средний
+                Средний достаток
               </label>
             </div>
             <div className={styles.radio_btn}>
@@ -76,7 +76,7 @@ const HomePage = observer(() => {
                 className={`${isRadioSelected(rich) && styles.label}`}
                 htmlFor="3"
               >
-                Богатый
+                Обеспеченный
               </label>
             </div>
           </div>
@@ -87,7 +87,15 @@ const HomePage = observer(() => {
                 isRadioSelected(normal) && styles.yellow
               } ${isRadioSelected(rich) && styles.green}`}
             >
-              <NavLink to="/game" onClick={() => mainStore.difficultyChange(selectRadioBtn)}>Начать Игру</NavLink>
+              <NavLink
+                to="/game"
+                onClick={() => {
+                  mainStore.difficultyChange(selectRadioBtn);
+                  mainStore.easy();
+                }}
+              >
+                Начать Игру
+              </NavLink>
             </div>
           </div>
         </div>
