@@ -7,6 +7,7 @@ import { mainStore } from "../../store/main-store";
 import PoorSVG from "../../assets/images/Poor.svg";
 import NormalSVG from "../../assets/images/Normal.svg";
 import RichSVG from "../../assets/images/Rich.svg";
+import { NavLink } from "react-router-dom";
 
 const HomePage = observer(() => {
   const [selectRadioBtn, setSelectRadioBtn] = useState("Eazy");
@@ -18,6 +19,7 @@ const HomePage = observer(() => {
   const poor = "Eazy";
   const normal = "Middle";
   const rich = "Rich";
+
 
   return (
     <div className={styles.homepage}>
@@ -90,7 +92,7 @@ const HomePage = observer(() => {
                   mainStore.difficultyChange(selectRadioBtn);
                   mainStore.easy();
                   setPage(true)
-                }}>Начать игру</button>
+                }}><NavLink to='/game'>Начать игру</NavLink></button>
             </div>
           </div>
         </div>

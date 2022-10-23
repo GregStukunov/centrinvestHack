@@ -107,6 +107,11 @@
   cursor: pointer;
   background-color: #900101;
 
+  & a {
+    text-decoration: none;
+    color: #fFf;
+  }
+
   &:hover {
     background-color: #650000;
   }
@@ -131,7 +136,10 @@
   transition: 0.2s;
   cursor: pointer;
   background-color: #bda401;
-
+  & a {
+    text-decoration: none;
+    color: #fFf;
+  }
   &:hover {
     background-color: #938000;
   }
@@ -156,7 +164,10 @@
   transition: 0.2s;
   cursor: pointer;
   background-color: #598200;
-
+  & a {
+    text-decoration: none;
+    color: #fFf;
+  }
   &:hover {
     background-color: #415f00;
   }
