@@ -47,8 +47,19 @@
   font-family: Roboto Mono;
   text-transform: uppercase;
   font-size: 30px;
+
   & label {
+    text-transform: capitalize;
     cursor: pointer;
+    color: white;
+    width: 70%;
+    background-color: #546851;
+    padding: 6px 20px;
+    transition: .2s;
+
+    &:hover {
+      background-color: #86A881;
+    }
   }
 
   & input {
@@ -57,7 +68,7 @@
 }
 
 .label {
-  color: #fff7ac;
+  background-color: #86A881 !important;
 }
 
 .homePage_img {
