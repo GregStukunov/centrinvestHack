@@ -44,7 +44,7 @@ const HomePage = observer(() => {
                 className={`${isRadioSelected(poor) && styles.label}`}
                 htmlFor="1"
               >
-                Бедняк
+                Бедный
               </label>
             </div>
             <div className={styles.radio_btn}>
@@ -60,7 +60,7 @@ const HomePage = observer(() => {
                 className={`${isRadioSelected(normal) && styles.label}`}
                 htmlFor="2"
               >
-                Средний достаток
+                Средне обеспеченный
               </label>
             </div>
             <div className={styles.radio_btn}>
@@ -76,7 +76,7 @@ const HomePage = observer(() => {
                 className={`${isRadioSelected(rich) && styles.label}`}
                 htmlFor="3"
               >
-                Обеспеченный
+                Богатый
               </label>
             </div>
           </div>

@@ -35,7 +35,7 @@ const skipTraining = {
 export const GamePage = () => {
   const [questions, setQuestions] = useState(null);
   const [training, setTraining] = useState(true);
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState(18);
 
   const [health, setHealth] = useState(mainStore.health);
   const [happiness, setHappiness] = useState(mainStore.happiness);
@@ -49,7 +49,6 @@ export const GamePage = () => {
   };
 
   const endTraining = () => {
-    ageIncrementer(18);
     setTraining(false);
   };
 
@@ -118,7 +117,7 @@ export const GamePage = () => {
     setAge(
       age +
         (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer2.age
+          ? questions[0].eazy.questions[currQuest].age
           : 0)
     );
 

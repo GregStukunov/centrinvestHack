@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./characteristics.module.scss";
 import cn from "classnames";
 
+import { observer } from 'mobx-react-lite'
+
 import healthImg from "../../../../assets/images/Health.svg";
 import hungerImg from "../../../../assets/images/Hunger.svg";
 import moneyImg from "../../../../assets/images/Money.svg";
@@ -14,27 +16,12 @@ type Props = {
   happiness: number;
 };
 
-const Characteristics = ({ health, hunger, money, happiness }: Props) => {
-  const healthTheme = cn({
-    [styles.red]: health <= 40,
-    [styles.yellow]: health <= 70,
-    [styles.green]: health <= 100,
-  });
-  const hungerTheme = cn({
-    [styles.red]: hunger <= 40,
-    [styles.yellow]: hunger <= 70,
-    [styles.green]: hunger <= 100,
-  });
-  const moneyTheme = cn({
-    [styles.red]: money <= 40,
-    [styles.yellow]: money <= 70,
-    [styles.green]: money <= 100,
-  });
-  const happinessTheme = cn({
-    [styles.red]: happiness <= 40,
-    [styles.yellow]: happiness <= 70,
-    [styles.green]: happiness <= 100,
-  });
+const Characteristics = observer(({health, hunger, money, happiness}: Props) => {
+
+   const healthTheme = cn({ [styles.red]: health <= 40, [styles.yellow]:  health <= 70, [styles.green]: health <= 100 }); 
+   const hungerTheme = cn({ [styles.red]: hunger <= 40, [styles.yellow]:  hunger <= 70, [styles.green]: hunger <= 100 }); 
+   const moneyTheme = cn({ [styles.red]: money <= 40, [styles.yellow]:  money <= 70, [styles.green]: money <= 100 }); 
+   const happinessTheme = cn({ [styles.red]: happiness <= 40, [styles.yellow]:  happiness <= 70, [styles.green]: happiness <= 100 }); 
 
   return (
     <div className={styles.characteristics}>
@@ -57,7 +44,7 @@ const Characteristics = ({ health, hunger, money, happiness }: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+})
 
-export default Characteristics;
+export default Characteristics
