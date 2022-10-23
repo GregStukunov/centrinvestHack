@@ -1,0 +1,28 @@
+.education {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    & button {
+        padding: 13px 10px;
+        text-align: left;
+        margin: 0 auto;
+        width: 85%;
+        border: none;
+        background-color: #86A881;
+
+        color: #FFF;
+        font-family: Roboto Mono;
+        font-size: 18px;
+    }
+}
+
+.text {
+    width: 80%;
+    margin: 0 auto;
+    color: #FFF;
+    text-align: center;
+    font-family: Roboto Mono;
+    background-color: #86A881;
+    padding: 10rem 1rem;
+    border-radius: 10px;
+}

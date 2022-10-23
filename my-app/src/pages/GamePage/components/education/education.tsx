@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from './education.module.scss'
 
 type EducationComponentProps = {
   LastPage: JSX.Element;
@@ -21,12 +22,12 @@ export const EducationComponent = (props: EducationComponentProps) => {
   return (
     <div>
       {currentPage <= arrayOfEducationReplics.length - 1 && (
-        <div>
-          {arrayOfEducationReplics[currentPage]}
-          <button onClick={customHandler} />
+        <div className={styles.education}>
+          {<div className={styles.text}>{arrayOfEducationReplics[currentPage]}</div>}
+          <button onClick={customHandler}>Далее</button>
         </div>
       )}
-      {currentPage === arrayOfEducationReplics.length - 1 && LastPage}
+      {currentPage > arrayOfEducationReplics.length - 1 && LastPage}
     </div>
   );
 };

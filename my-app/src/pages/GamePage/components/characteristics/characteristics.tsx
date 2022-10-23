@@ -16,7 +16,7 @@ type Props = {
   happiness: number;
 };
 
-const Characteristics = ({health, hunger, money, happiness}: Props) => {
+const Characteristics = observer(({health, hunger, money, happiness}: Props) => {
 
    const healthTheme = cn({ [styles.red]: health <= 40, [styles.yellow]:  health <= 70, [styles.green]: health <= 100 }); 
    const hungerTheme = cn({ [styles.red]: hunger <= 40, [styles.yellow]:  hunger <= 70, [styles.green]: hunger <= 100 }); 
@@ -45,4 +45,6 @@ const Characteristics = ({health, hunger, money, happiness}: Props) => {
       </div>
     </div>
   )
-}
+})
+
+export default Characteristics
