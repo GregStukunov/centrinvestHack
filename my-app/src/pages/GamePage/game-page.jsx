@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 import Sabath from "../../assets/images/characters/sabath.svg";
@@ -11,13 +11,15 @@ import styles from "./game-page.module.scss";
 import { mainStore } from "../../store/main-store";
 import Characteristics from "./components/characteristics/characteristics";
 
+import { EducationComponent } from "./components/education/education";
+
 const supabase = createClient(
   "https://mnumahwmrmdklgvvmtlf.supabase.co/",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1udW1haHdtcm1ka2xndnZtdGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjYzNjA0MzYsImV4cCI6MTk4MTkzNjQzNn0.P4BIRTYA51C2ikll17z7Ju9RfvQoERwZLTV3xa78yT8"
 );
 
 const icons = {
-  sergay: { name: "Sabath(Сабатх)", path: Sabath },
+  sergay: { name: "Неизвестный", path: Sabath },
   van: { name: "Ван ДаркХолм", path: Dungeon },
   decan: { name: "Декан", path: Dickan },
   bank_employee: { name: "Сотрудник Банка", path: Employee },
@@ -123,6 +125,22 @@ export const GamePage = () => {
     setCurrQuest(currQuest + 1);
   };
 
+  const education = (
+    <div className={styles.question}>
+      <div className={styles.iconWrap}>
+        <img src={icons.sergay.path} className={styles.icon} />
+      </div>
+      <div className={styles.name}>{icons.sergay.name}</div>
+      <div className={styles.question_wrapper}>
+        <div className={styles.skip_question}>{}</div>
+        <div className={styles.buttons}>
+          <button onClick={endTraining}>{skipTraining.answer1}</button>
+          <button onClick={endTraining}>{skipTraining.answer2}</button>
+        </div>
+      </div>
+    </div>
+  );
+
   useEffect(() => {
     const request = async () => {
       const { data, error } = await supabase.from("test").select("*");
@@ -147,21 +165,7 @@ export const GamePage = () => {
             happiness={happiness}
           />
         </div>
-        {training && (
-          <div className={styles.question}>
-            <div className={styles.iconWrap}>
-              <img src={icons.sergay.path} className={styles.icon} />
-            </div>
-            <div className={styles.name}>{icons.sergay.name}</div>
-            <div className={styles.question_wrapper}>
-              <div className={styles.skip_question}>{}</div>
-              <div className={styles.buttons}>
-                <button onClick={endTraining}>{skipTraining.answer1}</button>
-                <button onClick={endTraining}>{skipTraining.answer2}</button>
-              </div>
-            </div>
-          </div>
-        )}
+        {training && <EducationComponent LastPage={education} />}
         {!training && (
           <div className={styles.question}>
             <div className={styles.iconWrap}>
