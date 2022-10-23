@@ -24,48 +24,19 @@ const skipTraining = {
   answer2: "нуууу...",
 };
 
-type Question = {
-  name: "van" | "sabath";
-  text: string;
-  answer1: {
-    text: string;
-    stats: {
-      health: number;
-      happiness: number;
-      money: number;
-      hunger: number;
-    };
-    age: number;
-  };
-  answer2: {
-    text: string;
-    stats: {
-      health: number;
-      happiness: number;
-      money: number;
-      hunger: number;
-    };
-    age: number;
-  };
-};
+export const GamePage = () => {
+  const [questions, setQuestions] = useState(null);
+  const [training, setTraining] = useState(true);
+  const [age, setAge] = useState(0);
 
-type QuestionsType = Array<{
-  eazy: { questions: Array<Question> };
-}>;
+  const [health, setHealth] = useState(mainStore.health);
+  const [happiness, setHappiness] = useState(mainStore.happiness);
+  const [money, setMoney] = useState(mainStore.money);
+  const [hunger, setHunger] = useState(mainStore.hunger);
 
-export const GamePage: FC = () => {
-  const [questions, setQuestions] = useState<QuestionsType | null>(null);
-  const [training, setTraining] = useState<boolean>(true);
-  const [age, setAge] = useState<number>(0);
+  const [currQuest, setCurrQuest] = useState(0);
 
-  const [health, setHealth] = useState<number>(mainStore.health);
-  const [happiness, setHappiness] = useState<number>(mainStore.happiness);
-  const [money, setMoney] = useState<number>(mainStore.money);
-  const [hunger, setHunger] = useState<number>(mainStore.hunger);
-
-  const [currQuest, setCurrQuest] = useState<number>(0);
-
-  const ageIncrementer = (currIncr: number) => {
+  const ageIncrementer = (currIncr) => {
     setAge(age + currIncr);
   };
 
