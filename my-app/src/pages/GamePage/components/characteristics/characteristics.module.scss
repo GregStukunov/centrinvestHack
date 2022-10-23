@@ -36,3 +36,17 @@
 .red {
     filter: invert(77%) sepia(53%) saturate(1012%) hue-rotate(301deg) brightness(112%) contrast(102%);
 }
+
+@media (max-width: 780px) {
+    .characteristics_container {
+        padding: 5px 0;
+    }
+
+    .characteristics {
+        &_item {
+            & img {
+                height: 40px;
+            }
+        }
+    }
+}
