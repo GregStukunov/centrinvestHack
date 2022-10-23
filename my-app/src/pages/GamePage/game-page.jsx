@@ -3,6 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 
 import Sabath from "../../assets/images/characters/sabath.svg";
 import Dungeon from "../../assets/images/characters/dungeon.svg";
+import Dickan from "../../assets/images/characters/dickan.svg";
+import Employee from "../../assets/images/characters/employee.svg";
+import Girl from "../../assets/images/characters/girl.svg";
 
 import styles from "./game-page.module.scss";
 import { mainStore } from "../../store/main-store";
@@ -14,8 +17,11 @@ const supabase = createClient(
 );
 
 const icons = {
-  sabath: { name: "Sabath(Сабатх)", path: Sabath },
+  sergay: { name: "Sabath(Сабатх)", path: Sabath },
   van: { name: "Ван ДаркХолм", path: Dungeon },
+  decan: { name: "Декан", path: Dickan },
+  bank_employee: { name: "Сотрудник Банка", path: Employee },
+  girl: { name: "Девушка Юля", path: Girl },
 };
 
 const skipTraining = {
@@ -127,7 +133,6 @@ export const GamePage = () => {
       setQuestions(data);
     };
     request();
-    console.log(questions);
     return;
   }, []);
 
@@ -145,9 +150,9 @@ export const GamePage = () => {
         {training && (
           <div className={styles.question}>
             <div className={styles.iconWrap}>
-              <img src={icons.sabath.path} className={styles.icon} />
+              <img src={icons.sergay.path} className={styles.icon} />
             </div>
-            <div className={styles.name}>{icons.sabath.name}</div>
+            <div className={styles.name}>{icons.sergay.name}</div>
             <div className={styles.question_wrapper}>
               <div className={styles.skip_question}>{}</div>
               <div className={styles.buttons}>
@@ -207,7 +212,7 @@ export const GamePage = () => {
         )}
         <div className={styles.characteristics}>
           <div className={styles.characteristics_content}>
-            <div className={styles.age}>{age + "лет"}</div>
+            <div className={styles.age}>{age + " лет"}</div>
             <div className={styles.buffs}>
               <div className={styles.buffs_item}></div>
               <div className={styles.buffs_item}></div>
