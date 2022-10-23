@@ -1,12 +1,12 @@
 import { useState } from "react";
-import styles from './education.module.scss'
+import styles from "./education.module.scss";
 
 type EducationComponentProps = {
-  LastPage: JSX.Element;
+  setFinished: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const EducationComponent = (props: EducationComponentProps) => {
-  const { LastPage } = props;
+  const { setFinished } = props;
 
   const [currentPage, setCurrentPage] = useState<number>(0);
   const arrayOfEducationReplics = [
@@ -16,18 +16,21 @@ export const EducationComponent = (props: EducationComponentProps) => {
     "Подойдя к вам он улыбается и произносит бархатным, слегка хриплым голосом",
   ];
   const customHandler = () => {
+    if (currentPage === arrayOfEducationReplics.length - 1) {
+      setFinished(false);
+      return;
+    }
     setCurrentPage(currentPage + 1);
   };
 
   return (
     <div>
-      {currentPage <= arrayOfEducationReplics.length - 1 && (
-        <div className={styles.education}>
-          {<div className={styles.text}>{arrayOfEducationReplics[currentPage]}</div>}
-          <button onClick={customHandler}>Далее</button>
+      <div className={styles.education}>
+        <div className={styles.text}>
+          {arrayOfEducationReplics[currentPage]}
         </div>
-      )}
-      {currentPage > arrayOfEducationReplics.length - 1 && LastPage}
+        <button onClick={customHandler}>Далее</button>
+      </div>
     </div>
   );
 };
