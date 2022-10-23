@@ -6,6 +6,9 @@ import Dungeon from "../../assets/images/characters/dungeon.svg";
 import Dickan from "../../assets/images/characters/dickan.svg";
 import Employee from "../../assets/images/characters/employee.svg";
 import Girl from "../../assets/images/characters/girl.svg";
+import Event from "../../assets/images/characters/event.svg";
+
+import { observer } from "mobx-react-lite";
 
 import styles from "./game-page.module.scss";
 import { mainStore } from "../../store/main-store";
@@ -25,9 +28,10 @@ const icons = {
   decan: { name: "Декан", path: Dickan },
   bank_employee: { name: "Сотрудник Банка", path: Employee },
   girl: { name: "Девушка Юля", path: Girl },
+  event: { name: "Событие", path: Event },
 };
 
-export const GamePage = () => {
+export const GamePage = observer(() => {
   const [questions, setQuestions] = useState(null);
   const [training, setTraining] = useState(true);
   const [age, setAge] = useState(18);
@@ -40,13 +44,19 @@ export const GamePage = () => {
 
   const [currQuest, setCurrQuest] = useState(0);
 
-  const ageIncrementer = (currIncr) => {
-    setAge(age + currIncr);
-  };
-
-  const endTraining = () => {
-    setTraining(false);
-  };
+  useEffect(() => {
+    const request = async () => {
+      const { data, error } = await supabase.from("test").select("*");
+      if (error) {
+        setQuestions(null);
+        throw error;
+      }
+      setQuestions(data);
+    };
+    request();
+    console.log(questions);
+    return;
+  }, [questions]);
 
   const changeCharacteristicsFirst = () => {
     const newHealth =
@@ -86,7 +96,7 @@ export const GamePage = () => {
       return;
     }
 
-    const newAge = age + questions[0].eazy.questions[currQuest].answer1.age;
+    const newAge = age + questions[0].eazy.questions[currQuest].age;
     if (newAge < 70) {
       setAge(newAge);
     } else {
@@ -96,19 +106,6 @@ export const GamePage = () => {
 
     setCurrQuest(currQuest + 1);
   };
-
-  useEffect(() => {
-    const request = async () => {
-      const { data, error } = await supabase.from("test").select("*");
-      if (error) {
-        setQuestions(null);
-        throw error;
-      }
-      setQuestions(data);
-    };
-    request();
-    return;
-  }, []);
 
   const changeCharacteristicsSecond = () => {
     const newHealth =
@@ -148,7 +145,7 @@ export const GamePage = () => {
       return;
     }
 
-    const newAge = age + questions[0].eazy.questions[currQuest].answer2.age;
+    const newAge = age + questions[0].eazy.questions[currQuest].age;
     if (newAge < 60) {
       setAge(newAge);
     } else {
@@ -236,4 +233,4 @@ export const GamePage = () => {
   ) : (
     <LastPage errorReason={error} />
   );
-};
+});

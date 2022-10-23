@@ -11,7 +11,6 @@ import { NavLink } from "react-router-dom";
 
 const HomePage = observer(() => {
   const [selectRadioBtn, setSelectRadioBtn] = useState("Eazy");
-  const [page, setPage] = useState(false)
   const isRadioSelected = (value: string): boolean => selectRadioBtn === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setSelectRadioBtn(e.currentTarget.value);
@@ -19,7 +18,6 @@ const HomePage = observer(() => {
   const poor = "Eazy";
   const normal = "Middle";
   const rich = "Rich";
-
 
   return (
     <div className={styles.homepage}>
@@ -88,11 +86,14 @@ const HomePage = observer(() => {
                 isRadioSelected(normal) && styles.yellow
               } ${isRadioSelected(rich) && styles.green}`}
             >
-              <button onClick={() => {
+              <button
+                onClick={() => {
                   mainStore.difficultyChange(selectRadioBtn);
                   mainStore.easy();
-                  setPage(true)
-                }}><NavLink to='/game'>Начать игру</NavLink></button>
+                }}
+              >
+                <NavLink to="/game">Начать игру</NavLink>
+              </button>
             </div>
           </div>
         </div>
