@@ -92,6 +92,7 @@
 
 .name {
   color: #fff7ac;
+  font-size: 20px;
 }
 
 .buttons {
@@ -101,6 +102,7 @@
   min-height: 50px;
 
   & button {
+    padding: 16px 10px;
     text-align: left;
     font-size: 20px;
     height: auto;
