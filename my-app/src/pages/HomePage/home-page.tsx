@@ -11,6 +11,7 @@ import RichSVG from "../../assets/images/Rich.svg";
 
 const HomePage = observer(() => {
   const [selectRadioBtn, setSelectRadioBtn] = useState("Eazy");
+  const [page, setPage] = useState(false)
   const isRadioSelected = (value: string): boolean => selectRadioBtn === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setSelectRadioBtn(e.currentTarget.value);
@@ -86,15 +87,11 @@ const HomePage = observer(() => {
                 isRadioSelected(normal) && styles.yellow
               } ${isRadioSelected(rich) && styles.green}`}
             >
-              <NavLink
-                to="/game"
-                onClick={() => {
+              <button onClick={() => {
                   mainStore.difficultyChange(selectRadioBtn);
                   mainStore.easy();
-                }}
-              >
-                Начать Игру
-              </NavLink>
+                  setPage(true)
+                }}>Начать игру</button>
             </div>
           </div>
         </div>
