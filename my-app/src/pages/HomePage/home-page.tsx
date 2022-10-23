@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import styles from "./home-page.module.scss";
 import { observer } from "mobx-react-lite";
 
