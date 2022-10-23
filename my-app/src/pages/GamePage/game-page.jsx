@@ -27,15 +27,16 @@ const icons = {
 };
 
 const skipTraining = {
-  question: "Хочешь ли пропустить обучение?",
-  answer1: "все понятно...",
-  answer2: "нуууу...",
+  question: "Мы разве не виделись ранее?",
+  answer1: "Даааа... Рад вас видеть;)",
+  answer2: "Нет, кто вы?",
 };
 
 export const GamePage = () => {
   const [questions, setQuestions] = useState(null);
   const [training, setTraining] = useState(true);
   const [age, setAge] = useState(18);
+  const [error, setError] = useState(null);
 
   const [health, setHealth] = useState(mainStore.health);
   const [happiness, setHappiness] = useState(mainStore.happiness);
@@ -53,73 +54,127 @@ export const GamePage = () => {
   };
 
   const changeCharacteristicsFirst = () => {
-    setHealth(
-      health +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer1.stats.health
-          : 0)
-    );
-    setHappiness(
-      happiness +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer1.stats.happiness
-          : 0)
-    );
-    setMoney(
-      money +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer1.stats.money
-          : 0)
-    );
-    setHunger(
-      hunger +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer1.stats.hunger
-          : 0)
-    );
+    const newHealth =
+      health + (questions !== null && questions !== undefined)
+        ? questions[0].eazy.questions[currQuest].answer1.stats.health
+        : 0;
+    if (newHealth > 0) {
+      setHealth(newHealth);
+    } else {
+      setError("health");
+      return;
+    }
 
-    setAge(
-      age + 
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer1.age
-          : 0)
-    );
+    const newHappiness =
+      happiness +
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer1.stats.happiness
+        : 0);
+    if (newHappiness > 0) {
+      setHappiness(newHappiness);
+    } else {
+      setError("happiness");
+      return;
+    }
+
+    const newMoney =
+      money +
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer1.stats.money
+        : 0);
+    if (newMoney > 0) {
+      setMoney(newMoney);
+    } else {
+      setError("mone");
+      return;
+    }
+
+    const newHunger =
+      hunger +
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer1.stats.hunger
+        : 0);
+    if (newHunger > 0) {
+      setHunger(newHunger);
+    } else {
+      setError("hunger");
+      return;
+    }
+
+    const newAge =
+      age +
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer1.age
+        : 0);
+    if (newAge < 70) {
+      setAge(newAge);
+    } else {
+      setError("age");
+      return;
+    }
 
     setCurrQuest(currQuest + 1);
   };
 
   const changeCharacteristicsSecond = () => {
-    setHealth(
-      health +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer2.stats.health
-          : 0)
-    );
-    setHappiness(
-      happiness +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer2.stats.happiness
-          : 0)
-    );
-    setMoney(
-      money +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer2.stats.money
-          : 0)
-    );
-    setHunger(
-      hunger +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].answer2.stats.hunger
-          : 0)
-    );
+    const newHealth =
+      health + (questions !== null && questions !== undefined)
+        ? questions[0].eazy.questions[currQuest].answer2.stats.health
+        : 0;
+    if (newHealth > 0) {
+      setHealth(newHealth > 100 ? 100 : newHealth);
+    } else {
+      setError("health");
+      return;
+    }
 
-    setAge(
+    const newHappiness =
+      happiness +
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer2.stats.happiness
+        : 0);
+    if (newHappiness > 0) {
+      setHappiness(newHappiness > 100 ? 100 : newHappiness);
+    } else {
+      setError("happiness");
+      return;
+    }
+
+    const newMoney =
+      money +
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer2.stats.money
+        : 0);
+    if (newMoney > 0) {
+      setMoney(newMoney > 100 ? 100 : newMoney);
+    } else {
+      setError("money");
+      return;
+    }
+
+    const newHunger =
+      hunger +
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer2.stats.hunger
+        : 0);
+    if (newHunger > 0) {
+      setHunger(newHunger > 100 ? 100 : newHunger);
+    } else {
+      setError("hunger");
+      return;
+    }
+
+    const newAge =
       age +
-        (questions !== null && questions !== undefined
-          ? questions[0].eazy.questions[currQuest].age
-          : 0)
-    );
+      (questions !== null && questions !== undefined
+        ? questions[0].eazy.questions[currQuest].answer2.age
+        : 0);
+    if (newAge < 70) {
+      setAge(newAge);
+    } else {
+      setError("age");
+      return;
+    }
 
     setCurrQuest(currQuest + 1);
   };
@@ -131,7 +186,7 @@ export const GamePage = () => {
       </div>
       <div className={styles.name}>{icons.sergay.name}</div>
       <div className={styles.question_wrapper}>
-        <div className={styles.skip_question}>{}</div>
+        <div className={styles.skip_question}>{skipTraining.text}</div>
         <div className={styles.buttons}>
           <button onClick={endTraining}>{skipTraining.answer1}</button>
           <button onClick={endTraining}>{skipTraining.answer2}</button>
