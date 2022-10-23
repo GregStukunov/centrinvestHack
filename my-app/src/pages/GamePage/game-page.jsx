@@ -79,7 +79,7 @@ export const GamePage = () => {
     );
 
     setAge(
-      age +
+      age + 
         (questions !== null && questions !== undefined
           ? questions[0].eazy.questions[currQuest].answer1.age
           : 0)

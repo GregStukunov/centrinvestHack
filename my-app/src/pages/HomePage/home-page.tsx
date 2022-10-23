@@ -29,7 +29,6 @@ const HomePage = observer(() => {
             {isRadioSelected(normal) && <img src={NormalSVG} alt="" />}
             {isRadioSelected(rich) && <img src={RichSVG} alt="" />}
           </div>
-
           <div className={styles.characters}>
             <div className={styles.radio_btn}>
               <input
@@ -39,11 +38,11 @@ const HomePage = observer(() => {
                 value={poor}
                 checked={isRadioSelected(poor)}
                 onChange={handleRadioClick}
-              />
+                />
               <label
                 className={`${isRadioSelected(poor) && styles.label}`}
                 htmlFor="1"
-              >
+                >
                 Бедный
               </label>
             </div>
@@ -55,11 +54,11 @@ const HomePage = observer(() => {
                 value={normal}
                 checked={isRadioSelected(normal)}
                 onChange={handleRadioClick}
-              />
+                />
               <label
                 className={`${isRadioSelected(normal) && styles.label}`}
                 htmlFor="2"
-              >
+                >
                 Средне обеспеченный
               </label>
             </div>
@@ -71,11 +70,11 @@ const HomePage = observer(() => {
                 value={rich}
                 checked={isRadioSelected(rich)}
                 onChange={handleRadioClick}
-              />
+                />
               <label
                 className={`${isRadioSelected(rich) && styles.label}`}
                 htmlFor="3"
-              >
+                >
                 Богатый
               </label>
             </div>
@@ -86,14 +85,14 @@ const HomePage = observer(() => {
               className={`${isRadioSelected(poor) && styles.red} ${
                 isRadioSelected(normal) && styles.yellow
               } ${isRadioSelected(rich) && styles.green}`}
-            >
+              >
               <NavLink
                 to="/game"
                 onClick={() => {
                   mainStore.difficultyChange(selectRadioBtn);
                   mainStore.easy();
                 }}
-              >
+                >
                 Начать Игру
               </NavLink>
             </div>
