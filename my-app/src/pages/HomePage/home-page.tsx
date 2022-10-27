@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import styles from "./home-page.module.scss";
-import { observer } from "mobx-react-lite";
+import React, { useState } from 'react';
 
-import { mainStore } from "../../store/main-store";
+import { observer } from 'mobx-react-lite';
+import { NavLink } from 'react-router-dom';
 
-import PoorSVG from "../../assets/images/Poor.svg";
-import NormalSVG from "../../assets/images/Normal.svg";
-import RichSVG from "../../assets/images/Rich.svg";
-import { NavLink } from "react-router-dom";
+import NormalSVG from '../../assets/images/Normal.svg';
+import PoorSVG from '../../assets/images/Poor.svg';
+import RichSVG from '../../assets/images/Rich.svg';
+import { mainStore } from '../../store/main-store';
+import styles from './home-page.module.scss';
 
 const HomePage = observer(() => {
-  const [selectRadioBtn, setSelectRadioBtn] = useState("Eazy");
+  const [selectRadioBtn, setSelectRadioBtn] = useState('Eazy');
   const isRadioSelected = (value: string): boolean => selectRadioBtn === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setSelectRadioBtn(e.currentTarget.value);
 
-  const poor = "Eazy";
-  const normal = "Middle";
-  const rich = "Rich";
+  const poor = 'Eazy';
+  const normal = 'Middle';
+  const rich = 'Rich';
 
   return (
     <div className={styles.homepage}>

@@ -1,0 +1,22 @@
+{
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx"],
+      "options": {
+        "parser": "babel",
+        "singleQuote": true,
+        "endOfLine": "auto",
+        "arrowParens": "always"
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "options": {
+        "parser": "typescript",
+        "endOfLine": "auto",
+        "arrowParens": "always",
+        "singleQuote": true
+      }
+    }
+  ]
+}

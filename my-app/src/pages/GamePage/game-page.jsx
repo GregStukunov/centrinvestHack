@@ -1,34 +1,32 @@
-import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { useEffect, useState, useMemo } from 'react';
 
-import Sabath from "../../assets/images/characters/sabath.svg";
-import Dungeon from "../../assets/images/characters/dungeon.svg";
-import Dickan from "../../assets/images/characters/dickan.svg";
-import Employee from "../../assets/images/characters/employee.svg";
-import Girl from "../../assets/images/characters/girl.svg";
-import Event from "../../assets/images/characters/event.svg";
+import { createClient } from '@supabase/supabase-js';
+import { observer } from 'mobx-react-lite';
 
-import { observer } from "mobx-react-lite";
-
-import styles from "./game-page.module.scss";
-import { mainStore } from "../../store/main-store";
-import Characteristics from "./components/characteristics/characteristics";
-
-import { EducationComponent } from "./components/education/education";
-import LastPage from "./components/lastpage/lastpage";
+import Dickan from '../../assets/images/characters/dickan.svg';
+import Dungeon from '../../assets/images/characters/dungeon.svg';
+import Employee from '../../assets/images/characters/employee.svg';
+import Event from '../../assets/images/characters/event.svg';
+import Girl from '../../assets/images/characters/girl.svg';
+import Sabath from '../../assets/images/characters/sabath.svg';
+import { mainStore } from '../../store/main-store';
+import Characteristics from './components/characteristics/characteristics';
+import { EducationComponent } from './components/education/education';
+import LastPage from './components/lastpage/lastpage';
+import styles from './game-page.module.scss';
 
 const supabase = createClient(
-  "https://mnumahwmrmdklgvvmtlf.supabase.co/",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1udW1haHdtcm1ka2xndnZtdGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjYzNjA0MzYsImV4cCI6MTk4MTkzNjQzNn0.P4BIRTYA51C2ikll17z7Ju9RfvQoERwZLTV3xa78yT8"
+  'https://mnumahwmrmdklgvvmtlf.supabase.co/',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1udW1haHdtcm1ka2xndnZtdGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjYzNjA0MzYsImV4cCI6MTk4MTkzNjQzNn0.P4BIRTYA51C2ikll17z7Ju9RfvQoERwZLTV3xa78yT8'
 );
 
 const icons = {
-  sergay: { name: "Неизвестный", path: Sabath },
-  van: { name: "Ван ДаркХолм", path: Dungeon },
-  decan: { name: "Декан", path: Dickan },
-  bank_employee: { name: "Сотрудник Банка", path: Employee },
-  girl: { name: "Девушка Юля", path: Girl },
-  event: { name: "Событие", path: Event },
+  sergay: { name: 'Неизвестный', path: Sabath },
+  van: { name: 'Ван ДаркХолм', path: Dungeon },
+  decan: { name: 'Декан', path: Dickan },
+  bank_employee: { name: 'Сотрудник Банка', path: Employee },
+  girl: { name: 'Девушка Юля', path: Girl },
+  event: { name: 'Событие', path: Event },
 };
 
 export const GamePage = observer(() => {
@@ -37,16 +35,11 @@ export const GamePage = observer(() => {
   const [age, setAge] = useState(18);
   const [error, setError] = useState(null);
 
-  const [health, setHealth] = useState(mainStore.health);
-  const [happiness, setHappiness] = useState(mainStore.happiness);
-  const [money, setMoney] = useState(mainStore.money);
-  const [hunger, setHunger] = useState(mainStore.hunger);
-
   const [currQuest, setCurrQuest] = useState(0);
 
   useEffect(() => {
     const request = async () => {
-      const { data, error } = await supabase.from("test").select("*");
+      const { data, error } = await supabase.from('test').select('*');
       if (error) {
         setQuestions(null);
         throw error;
@@ -60,39 +53,42 @@ export const GamePage = observer(() => {
 
   const changeCharacteristicsFirst = () => {
     const newHealth =
-      health + questions[0].eazy.questions[currQuest].answer1.stats.health;
+      mainStore.health +
+      questions[0].eazy.questions[currQuest].answer2.stats.health;
     if (newHealth > 0) {
-      setHealth(newHealth);
+      mainStore.health = newHealth;
     } else {
-      setError("health");
+      setError('health');
       return;
     }
 
     const newHappiness =
-      happiness +
-      questions[0].eazy.questions[currQuest].answer1.stats.happiness;
+      mainStore.happiness +
+      questions[0].eazy.questions[currQuest].answer2.stats.happiness;
     if (newHappiness > 0) {
-      setHappiness(newHappiness);
+      mainStore.happiness = newHappiness;
     } else {
-      setError("happiness");
+      setError('happiness');
       return;
     }
 
     const newMoney =
-      money + questions[0].eazy.questions[currQuest].answer1.stats.money;
+      mainStore.money +
+      questions[0].eazy.questions[currQuest].answer2.stats.money;
     if (newMoney > 0) {
-      setMoney(newMoney);
+      mainStore.money = newMoney;
     } else {
-      setError("money");
+      setError('money');
       return;
     }
 
     const newHunger =
-      hunger + questions[0].eazy.questions[currQuest].answer1.stats.hunger;
+      mainStore.hunger +
+      questions[0].eazy.questions[currQuest].answer2.stats.hunger;
     if (newHunger > 0) {
-      setHunger(newHunger);
+      mainStore.hunger = newHunger;
     } else {
-      setError("hunger");
+      setError('hunger');
       return;
     }
 
@@ -100,7 +96,7 @@ export const GamePage = observer(() => {
     if (newAge < 70) {
       setAge(newAge);
     } else {
-      setError("age");
+      setError('age');
       return;
     }
 
@@ -109,39 +105,42 @@ export const GamePage = observer(() => {
 
   const changeCharacteristicsSecond = () => {
     const newHealth =
-      health + questions[0].eazy.questions[currQuest].answer1.stats.health;
+      mainStore.health +
+      questions[0].eazy.questions[currQuest].answer1.stats.health;
     if (newHealth > 0) {
-      setHealth(newHealth);
+      mainStore.health = newHealth;
     } else {
-      setError("health");
+      setError('health');
       return;
     }
 
     const newHappiness =
-      happiness +
+      mainStore.happiness +
       questions[0].eazy.questions[currQuest].answer1.stats.happiness;
     if (newHappiness > 0) {
-      setHappiness(newHappiness);
+      mainStore.happiness = newHappiness;
     } else {
-      setError("happiness");
+      setError('happiness');
       return;
     }
 
     const newMoney =
-      money + questions[0].eazy.questions[currQuest].answer2.stats.money;
+      mainStore.money +
+      questions[0].eazy.questions[currQuest].answer2.stats.money;
     if (newMoney > 0) {
-      setMoney(newMoney);
+      mainStore.money = newMoney;
     } else {
-      setError("money");
+      setError('money');
       return;
     }
 
     const newHunger =
-      hunger + questions[0].eazy.questions[currQuest].answer2.stats.hunger;
+      mainStore.hunger +
+      questions[0].eazy.questions[currQuest].answer2.stats.hunger;
     if (newHunger > 0) {
-      setHunger(newHunger);
+      mainStore.hunger = newHunger;
     } else {
-      setError("hunger");
+      setError('hunger');
       return;
     }
 
@@ -149,22 +148,27 @@ export const GamePage = observer(() => {
     if (newAge < 60) {
       setAge(newAge);
     } else {
-      setError("age");
+      setError('age');
       return;
     }
 
     setCurrQuest(currQuest + 1);
   };
 
+  const currentQuestionImgSrc = useMemo(
+    () => icons[questions[0].eazy.questions[currQuest].name].path,
+    [questions, currQuest]
+  );
+
   return !Boolean(error) ? (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div>
           <Characteristics
-            health={health}
-            hunger={hunger}
-            money={money}
-            happiness={happiness}
+            health={mainStore.health}
+            hunger={mainStore.hunger}
+            money={mainStore.money}
+            happiness={mainStore.happiness}
           />
         </div>
         {training && !Boolean(error) && (
@@ -179,9 +183,9 @@ export const GamePage = observer(() => {
                     `${
                       questions !== null && questions !== undefined
                         ? questions[0].eazy.questions[currQuest].name
-                        : ""
+                        : ''
                     }`
-                  ].path
+                  ].name
                 }
                 className={styles.icon}
               />
@@ -192,7 +196,7 @@ export const GamePage = observer(() => {
                   `${
                     questions !== null && questions !== undefined
                       ? questions[0].eazy.questions[currQuest].name
-                      : ""
+                      : ''
                   }`
                 ].name
               }
@@ -201,18 +205,18 @@ export const GamePage = observer(() => {
               <div className={styles.skip_question}>
                 {questions !== null && questions !== undefined
                   ? questions[0].eazy.questions[currQuest].text
-                  : ""}
+                  : ''}
               </div>
               <div className={styles.buttons}>
                 <button onClick={changeCharacteristicsFirst}>
                   {questions !== null && questions !== undefined
                     ? questions[0].eazy.questions[currQuest].answer1.text
-                    : ""}
+                    : ''}
                 </button>
                 <button onClick={changeCharacteristicsSecond}>
                   {questions !== null && questions !== undefined
                     ? questions[0].eazy.questions[currQuest].answer2.text
-                    : ""}
+                    : ''}
                 </button>
               </div>
             </div>
@@ -220,7 +224,7 @@ export const GamePage = observer(() => {
         )}
         <div className={styles.characteristics}>
           <div className={styles.characteristics_content}>
-            <div className={styles.age}>{age + " лет"}</div>
+            <div className={styles.age}>{age + ' лет'}</div>
             <div className={styles.buffs}>
               <div className={styles.buffs_item}></div>
               <div className={styles.buffs_item}></div>

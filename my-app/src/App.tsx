@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GamePage } from "./pages/GamePage/game-page";
-import HomePage from "./pages/HomePage/home-page";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { GamePage } from './pages/GamePage/game-page';
+import HomePage from './pages/HomePage/home-page';
 
 const App = () => {
   return (
